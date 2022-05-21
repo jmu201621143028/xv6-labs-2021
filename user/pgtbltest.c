@@ -4,6 +4,8 @@
 #include "kernel/riscv.h"
 #include "user/user.h"
 
+#include "kernel/memlayout.h"
+
 void ugetpid_test();
 void pgaccess_test();
 
@@ -29,6 +31,8 @@ void
 ugetpid_test()
 {
   int i;
+  struct usyscall *u = (struct usyscall *)USYSCALL;
+  printf("%d\n", u->pid);
 
   printf("ugetpid_test starting\n");
   testname = "ugetpid_test";
@@ -41,6 +45,7 @@ ugetpid_test()
         exit(1);
       continue;
     }
+    printf("%d\n", ugetpid());
     if (getpid() != ugetpid())
       err("missmatched PID");
     exit(0);
