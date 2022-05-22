@@ -470,11 +470,7 @@ void vmprint(pagetable_t pte, int level)
     {
       for (int j = 0; j <= level; j++)
       {
-        printf("..");
-        if (j != level)
-        {
-          printf(" ");
-        }
+        printf(" ..");
       }
       printf("%d: pte %p pa %p\n", i, pte[i], PTE2PA(pte[i]));
       vmprint((pagetable_t)PTE2PA(pte[i]), level + 1);
